@@ -1,6 +1,11 @@
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net;
+using System.Text;
+
+
 
 namespace BookTrackerAPI.Services
 {
@@ -57,7 +62,7 @@ namespace BookTrackerAPI.Services
             return Task.FromResult(apiKey);
         }
 
-        public async Task<HealthCheckResult> CheckHealthAsync(...)
+        public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken)
         {
             const string healthQuery = "{ me { id } }";
             var content = new StringContent(
