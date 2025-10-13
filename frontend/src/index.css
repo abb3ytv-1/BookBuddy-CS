@@ -1,0 +1,1271 @@
+/* ========== THEME VARIABLES ========== */
+:root {
+    --primary: #19420A;
+    --secondary: #4b6c80;
+    --accent: #86b8ab;
+    --light: #f4f2e7;
+    --dark: #1c1b1b;
+    --glow: 0 0 8px rgba(255, 215, 0, 0.3);
+    --radius: 8px;
+    --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Lora', serif;
+}
+
+/* ========== GLOBAL STYLES ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-body), serif;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* ========== HERO SECTION ========== */
+.hero {
+    text-align: center;
+    padding: 5rem 2rem;
+    background-color: var(--secondary);
+    color: var(--light);
+    border-bottom: 2px solid var(--accent);
+}
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.hero .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.hero .btn {
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 1rem 2.5rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.hero .btn:hover {
+    background-color: var(--accent);
+    box-shadow: var(--glow);
+    transform: translateY(-3px);
+}
+
+.hero-image {
+    margin-top: 2rem;
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* ========== DASHBOARD LAYOUT ========== */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--light);
+}
+
+/* ========== SIDEBAR ========== */
+.dashboard-sidebar {
+    width: 250px;
+    background-color: var(--secondary);
+    color: var(--light);
+    padding: 2rem 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.user-info {
+    text-align: center;
+}
+
+.user-info h2 {
+    font-size: 1rem;
+    color: #fdfdfd;
+    margin-bottom: 0.25rem;
+}
+
+.user-info p {
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+.dashboard-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--light);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--accent);
+}
+
+.nav-item.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-left: 4px solid var(--accent);
+    padding-left: 0.75rem;
+}
+
+.nav-item svg {
+    font-size: 1.2rem;
+}
+
+.logout-button {
+    background: none;
+    border: none;
+    color: var(--light);
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+}
+
+.logout-button:hover {
+    color: var(--accent);
+}
+
+/* ========== MAIN DASHBOARD AREA ========== */
+.dashboard-main {
+    flex: 1;
+    padding: 2.5rem;
+}
+
+.dashboard-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+.btn-add-book {
+    background-color: var(--secondary);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-add-book:hover {
+    background-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+/* ========== STAT CARDS ========== */
+.stats-grid {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    padding: 2rem 1rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    flex: 1;
+    min-height: 120px;
+    text-align: center;
+}
+
+.stat-card h3 {
+    font-size: 1.1rem;
+    color: var(--secondary);
+    margin-bottom: 0.3rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+/* ========== PROGRESS BAR ========== */
+.progress-bar {
+    background-color: #e0e0e0;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 1rem;
+    position: relative;
+}
+
+.progress-fill {
+    background-color: var(--accent);
+    height: 100%;
+    transition: width 0.3s ease;
+    border-radius: 10px 0 0 10px;
+}
+
+.progress-bar span {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    color: var(--dark);
+    font-size: 0.9rem;
+    top: 0;
+    left: 0;
+    line-height: 20px;
+}
+
+/* ========== GOAL SECTION ========== */
+.goal-summary {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    font-size: 1.1rem;
+    color: var(--dark);
+    margin-bottom: 2rem;
+    max-width: 800px;
+    line-height: 1.8;
+}
+
+.goal-summary strong {
+    color: var(--primary);
+}
+
+.goal-tips {
+    background-color: #fffdf8;
+    border-left: 6px solid var(--accent);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 800px;
+}
+
+.goal-tips h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.goal-tips ul {
+    padding-left: 1.5rem;
+}
+
+.goal-tips li {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    color: var(--dark);
+}
+
+.goal-tips li::before {
+    content: "📖 ";
+    margin-right: 0.5rem;
+}
+
+.edit-goal-btn {
+    margin-top: 1rem;
+    background-color: var(--secondary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.edit-goal-btn:hover {
+    background-color: var(--accent);
+}
+
+.edit-goal-form {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.edit-goal-form input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: var(--radius);
+    width: 7.5rem;
+}
+
+.edit-goal-form button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+.status-dropdown {
+    margin-top: 0.5rem;
+    padding: 0.4rem;
+    font-size: 0.9rem;
+    border-radius: var(--radius);
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+/* ========== AUTH PAGE ========== */
+.auth-page {
+    background-color: var(--light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding: 3rem 1rem;
+}
+
+.auth-page h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 2rem;
+}
+
+.auth-page form {
+    background: white;
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: var(--radius);
+    font-size: 1rem;
+}
+
+.error-input {
+    border-color: var(--error);
+}
+
+.error {
+    color: var(--error);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.auth-page button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary);
+    color: var(--light);
+    font-size: 1.1rem;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-page button:hover {
+    background-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.auth-links {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.auth-links a {
+    color: var(--secondary);
+    text-decoration: underline;
+    margin-left: 0.25rem;
+}
+
+/* ========== BOOKS GRID ========== */
+.your-books-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: flex-start;
+}
+
+/* ========== BOOKS PAGE ========== */
+.books-page {
+    padding: 2rem;
+    text-align: center;
+}
+
+.book-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    justify-items: center;
+    margin-top: 2rem;
+}
+
+.book-card {
+    background-color: var(--light);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    width: 220px;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.book-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+}
+
+.book-card h3, 
+.book-card p {
+    font-size: 0.95rem;
+    margin: 0.3rem 0;
+    color: #000;
+    text-align: center;
+}
+
+.book-card a {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    color: var(--primary);
+    transition: color 0.2s;
+}
+
+.book-card a:hover {
+    color: var(--secondary);
+}
+
+.book-status select {
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+}
+
+/* ========== MESSAGE BOX ========== */
+.message-box {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background-color: #ffe0e0;
+    color: #b00020;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+/* ========== BOOK DETAILS PAGE ========== */
+.book-details-container {
+    width: auto;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #e5ddba;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 2rem;
+}
+
+.book-details-container img {
+    width: 500px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-meta {
+    width: 800px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-meta h2 {
+    font-size: 5rem;
+    margin-bottom: 0.5rem;
+    color: #000000;
+}
+
+.book-meta h4 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #000000;
+    margin-bottom: 1.5rem;
+}
+
+.book-meta textarea {
+    height: 200px;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.book-meta select {
+    margin-bottom: 1rem;
+    padding: 0.4rem;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    font-size: 1rem;
+}
+
+.book-meta button {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: none;
+    background-color: #469b67;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.book-meta button:hover {
+    background-color: #3a58a3;
+}
+
+.book-details-card {
+    display: flex;
+    gap: 2rem;
+    background-color: #ece5c8;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 1000px;
+    width: 100%;
+}
+
+.book-cover {
+    width: 240px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.book-info-section {
+    flex: 1;
+}
+
+.book-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.book-author {
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.book-description {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.book-meta p {
+    margin: 0.25rem 0;
+}
+
+.review-section {
+    margin-top: 1rem;
+    width: 200px;
+}
+
+.review-section textarea {
+    width: 200px;
+    height: auto;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.review-section select {
+    margin-bottom: 0.5rem;
+    padding: 0.4rem;
+    width: 200px;
+    border-radius: 6px;
+}
+
+.review-section button {
+    background-color: #3c8759;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.review-section button:hover {
+    background-color: #2e6a47;
+}
+
+/* ========== FEATURES SECTION ========== */
+.features {
+    text-align: center;
+    padding: 4rem 1rem;
+    background-color: var(--light);
+}
+
+.features h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--primary);
+}
+
+.book-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.feature-icon {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+/* ========== TESTIMONIALS SECTION ========== */
+.testimonials {
+    text-align: center;
+    padding: 4rem 1rem;
+    background-color: var(--light);
+}
+
+.testimonials h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: var(--primary);
+}
+
+.testimonials-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background-color: var(--light);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    font-size: 1rem;
+}
+
+.author {
+    margin-top: 0.75rem;
+    font-style: italic;
+    color: var(--secondary);
+}
+
+/* ========== STATS SECTION ========== */
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 3rem 1rem;
+    background-color: var(--light);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--dark);
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat strong {
+    display: block;
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+}
+
+/* ========== CTA SECTION ========== */
+.cta {
+    text-align: center;
+    padding: 4rem 1rem;
+    background-color: var(--secondary);
+    color: var(--light);
+}
+
+.cta h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--light);
+}
+
+.cta .btn {
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 1rem 2rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.cta .btn:hover {
+    background-color: var(--accent);
+    box-shadow: var(--glow);
+}
+
+/* ========== ACHIEVEMENT SECTION ========== */
+.achievement-section {
+    margin-top: 2rem;
+}
+
+.achievement-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.achievement-card {
+    background-color: var(--card-bg, #f8f9fa);
+    border-radius: 8px;
+    padding: 1rem;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.achievement-card img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 0.5rem;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 768px) {
+    .book-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-page {
+        display: block;
+        padding: 1rem;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .book-grid {
+        grid-template-columns: 1fr;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* ===================== Achievements Page ===================== */
+.achievements-page {
+    flex: 1;
+    padding: 2.5rem;
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+
+.achievements-page h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+
+.achievement-card {
+    background-color: var(--accent);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+.achievement-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.achievement-card img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+.achievement-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+}
+
+.achievement-card p {
+    font-size: 0.95rem;
+    margin: 0.25rem 0;
+    color: var(--dark);
+}
+
+.achievement-card .unlocked {
+    margin-top: 0.75rem;
+    font-weight: bold;
+    color: green;
+}
+
+.achievement-card .locked {
+    margin-top: 0.75rem;
+    font-weight: bold;
+    color: #555;
+    opacity: 0.6;
+    filter: grayscale(100%);
+}
+
+.achievement-progress {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--primary);
+}
+
+/* Optional: Add a nice hover glow for unlocked cards */
+.achievement-card.unlocked {
+    border: 2px solid gold;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+.toggle-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.toggle-buttons button {
+    padding: 0.5rem 1.5rem;
+    border: 1px solid var(--primary);
+    background-color: white;
+    color: var(--primary);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.toggle-buttons button.active,
+.toggle-buttons button:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.progress-bar-wrapper {
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 10px;
+    margin-top: 0.5rem;
+}
+
+.progress-bar {
+    background-color: var(--primary);
+    height: 100%;
+    transition: width 0.3s ease-in-out;
+}
+
+.friend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+.friend-card {
+    width: auto;
+    background-color: var(--light);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.friend-card:hover {
+    transform: translateY(-5px);
+}
+
+.friend-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+}
+
+.friend-card p {
+    font-weight: 600;
+    margin: 0.5rem 0;
+}
+
+.friend-card button {
+    background-color: var(--accent);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    color: white;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.friend-card button:hover {
+    background-color: var(--primary);
+}
+
+.dashboard-main input[type="text"] {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-right: 0.5rem;
+    width: 200px;
+}
+
+.dashboard-main button {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.dashboard-main button:hover {
+    background-color: var(--primary);
+}
+
+.settings-page {
+    padding: 2rem;
+    max-width: 600px;
+    margin: auto;
+}
+
+.settings-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.settings-page textarea,
+.settings-page input[type="text"] {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.profile-preview {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-top: 0.5rem;
+}
+
+.feed-container {
+  flex: 1;                  /* Allow it to grow and fill horizontal space */
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;   /* Stack feed cards vertically */
+    background-color: var(--light);
+    padding: 1rem 2rem;       /* Adjust padding as needed */
+}
+
+.feed-card {
+  width: 100%;              /* Take up full width of container */
+  max-width: none;          /* Remove any max-width constraints */
+  margin: 0.5rem 0;         /* Adjust vertical spacing */
+}
+
+
+.feed-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.feed-header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.feed-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.feed-info p {
+    margin: 0;
+}
+
+.feed-timestamp {
+    color: gray;
+    font-size: 0.8rem;
+}
+
+.feed-body {
+    margin-top: 1rem;
+}
+
+.feed-subtext {
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.feed-comment {
+    margin-bottom: 1rem;
+}
+
+.book-card {
+    display: flex;
+    gap: 1rem;
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 6px;
+    align-items: flex-start;
+}
+
+.book-card img {
+    width: 80px;
+    height: 120px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+.book-details h3 {
+    margin: 0;
+}
+
+.status-button {
+    margin-top: 0.5rem;
+    background: #31a64c;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.feed-actions {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #0077cc;
+    cursor: pointer;
+}
+
+.feed-comments {
+    margin-top: 0.5rem;
+}
+
+.feed-comments input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+
+.skeleton {
+    animation: pulse 1.5s infinite;
+}
+
+.skeleton-img,
+.skeleton-text,
+.skeleton-subtext {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.skeleton-img {
+    width: 60px;
+    height: 90px;
+}
+
+.skeleton-text {
+    width: 60%;
+    height: 20px;
+    margin: 0.5rem 0;
+}
+
+.skeleton-subtext {
+    width: 40%;
+    height: 16px;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.9;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0.9;
+    }
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--light);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.profile-picture {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+}
+
+.profile-bio {
+    font-size: 1rem;
+    color: #444;
+    max-width: 600px;
+}
+
+
+.spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--primary);
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    animation: spin 0.8s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.progress-bar {
+    background: #eee;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    margin: 10px 0;
+}
+
+.progress-fill {
+    background: var(--primary);
+    height: 100%;
+    transition: width 0.4s ease-in-out;
+}

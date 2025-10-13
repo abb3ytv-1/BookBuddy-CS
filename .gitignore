@@ -1,0 +1,24 @@
+# Ignore build folders
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+# Ignore logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Ignore environment & config secrets
+.env
+appsettings.Development.json
+
+# Ignore Docker artifacts
+*.db
+*.pid
+
+# Ignore frontend build (if applicable)
+frontend/node_modules/
+frontend/dist/
+frontend/build/
