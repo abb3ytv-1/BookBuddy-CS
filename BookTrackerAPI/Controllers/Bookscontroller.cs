@@ -61,7 +61,25 @@ namespace BookTrackerAPI.Controllers
                 return NotFound("Book not found in your library.");
 
             var previousStatus = userBook.Status;
-            userBook.Status = status;
+            
+            // using the State Pattern for transition
+            switch (status)
+            {
+                case "Read":
+                    userBook.Book.MarkAsRead();
+                    break;
+                case "Reading":
+                    userBook.Book.MarkAsReading();
+                    break;
+                case "Unread":
+                    userBook.Book.MarkAsUnread();
+                    break;
+                default:
+                    return BadRequest("Invalid status value.");
+            }
+
+            // keep the EF-compatible status string in sync
+            userBook.Status = userBook.Book.Status;
 
             var user = await _userManager.FindByIdAsync(userId);
             if (user != null)
