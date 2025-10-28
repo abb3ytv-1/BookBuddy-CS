@@ -1,7 +1,7 @@
-# BookBuddy 📚 — BookTracker API
+# 📚 BookBuddy — BookTracker API  
 
 BookBuddy is a C# Web API that allows users to manage, organize, and review their book collections.  
-It’s built with ASP.NET Core, Entity Framework, and Docker, with a connected frontend for the user interface.
+It’s built with **ASP.NET Core**, **Entity Framework**, and **Docker**, with a connected frontend for the user interface.
 
 ---
 
