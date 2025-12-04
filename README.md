@@ -1,84 +1,114 @@
-# 📚 BookBuddy — BookTracker API  
+📚 BookBuddy — BookTracker API
 
-BookBuddy is a C# Web API that allows users to manage, organize, and review their book collections.  
-It’s built with **ASP.NET Core**, **Entity Framework**, and **Docker**, with a connected frontend for the user interface.
+BookBuddy is a C# Web API that allows users to manage, organize, and review their personal book collections.
+Built with ASP.NET Core, Entity Framework Core, and Docker, it supports secure user authentication, achievements, notifications, and external book search.
 
----
+🎯 Purpose
 
-## 🎯 Purpose
 This project demonstrates:
-- RESTful API design in C#
-- Database integration using Entity Framework Core
-- Layered architecture (Controllers → Services → Data)
-- Containerized development with Docker
-- Frontend-backend communication
 
----
+RESTful API design in C#
 
-## 🧠 How to Run (Backend)
+Database integration with Entity Framework Core
 
-### 🧩 Requirements
-- [.NET 8 SDK or later](https://dotnet.microsoft.com/en-us/download)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop)
-- Visual Studio 2022 or VS Code
+Layered architecture: Controllers → Facade → Services → Data
 
-### 🧰 Run Using .NET CLI
-```bash
+Implementation of design patterns (Facade, State) for maintainable and extensible code
+
+Integration with notifications and external APIs (Hardcover API)
+
+The Facade pattern centralizes business logic, simplifies controllers, and improves maintainability.
+The State pattern allows books to manage their own reading statuses (Unread, Reading, Read) in a clean, object-oriented way.
+
+🧩 Features
+
+Track book status: Unread, Reading, Read
+
+Add reviews and ratings
+
+Achievements system when books are read
+
+Notifications for reviews and completed books
+
+Secure endpoints using JWT/Identity
+
+External API integration for searching books
+
+🧰 Setup & Run (Backend)
+Requirements
+
+.NET 8 SDK or later
+
+Docker Desktop
+
+Visual Studio 2022 or VS Code
+
+Run Using .NET CLI
 cd BookTrackerAPI
 dotnet restore
 dotnet build
 dotnet run
 
-🎯 Overview
+🧠 Architecture & Design
+Facade Pattern
 
-The State Pattern is used in this project to manage a book’s reading status (Unread, Reading, or Read) in a more scalable and maintainable way.
-Instead of using plain string values, each book now has a state object that determines how it transitions between statuses.
+The LibraryFacade simplifies controllers by centralizing interactions with:
 
-🧩 Why Use It
+AppDbContext (database)
 
-Previously, the Book model stored status as a simple string (e.g., "Reading"). Any time the status changed, logic for transitions (like setting “Read” or “Unread”) had to be handled manually in the controller or service layer.
+UserManager<AppUser> (user data)
 
-By introducing the State Pattern, the Book model now contains its own behavior for changing states. This encapsulates logic within the model itself, making it easier to:
+AchievementService (achievement tracking)
 
-Add new states in the future (e.g., “Wishlist” or “Abandoned”)
+NotificationSender (user notifications)
 
-Reduce duplicate code in controllers
+Controllers now focus only on HTTP requests/responses, while the facade handles all business logic for:
 
-Follow object-oriented best practices and the Single Responsibility Principle
+Updating book statuses
 
-🧱 Implementation Details
+Adding reviews
 
-Each state (ReadState, UnreadState, ReadingState) implements the shared interface IBookState, which defines:
+Awarding achievements
 
-string name { get; }
-void MarkAsRead(Book book);
-void MarkAsUnread(Book book);
-void MarkAsReading(Book book);
+Sending notifications
 
+State Pattern
 
-The Book model holds a reference to an IBookState:
-
-public IBookState State { get; set; } = new ReadingState();
-
-
-It provides helper methods to switch between states:
+Book reading statuses are managed with the State Pattern, allowing each book to handle its own state transitions:
 
 public void MarkAsRead() => State.MarkAsRead(this);
 public void MarkAsUnread() => State.MarkAsUnread(this);
 public void MarkAsReading() => State.MarkAsReading(this);
 
 
-In the BooksController, when a user updates their reading status, the app now calls these helper methods:
+Benefits:
 
-switch (status)
-{
-    case "Read": userBook.Book.MarkAsRead(); break;
-    case "Reading": userBook.Book.MarkAsReading(); break;
-    case "Unread": userBook.Book.MarkAsUnread(); break;
-}
-userBook.Status = userBook.Book.State.name;
+Reduces duplicate logic in controllers
 
-🪄 Result
+Keeps the model smart and modular
 
-The controller becomes simpler, and the model becomes smarter — each book knows how to manage its own state transitions.
-This design keeps logic modular and prepares the codebase for future feature expansion (like reading progress, favorites, or shelves).
+Makes it easy to add future states (e.g., Wishlist, Abandoned)
+
+✅ Benefits
+
+Clean separation of concerns
+
+Simplified, maintainable controllers
+
+Encapsulated business logic
+
+Extensible architecture for future features
+
+🔗 Technologies
+
+ASP.NET Core 7
+
+Entity Framework Core
+
+ASP.NET Identity
+
+C#
+
+SQL Server / SQLite
+
+Hardcover API integration

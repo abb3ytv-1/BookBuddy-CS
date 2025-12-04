@@ -1,42 +1,93 @@
+using BookTrackerAPI.Models.DTOs;
 using BookTrackerAPI.Models;
-using BookTrackerAPI.Services;
+using BookTrackerAPI.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
-namespace BookTrackerAPI.Facade
+public class LibraryFacade
 {
-    public class LibraryFacade
+    private readonly AppDbContext _context;
+    private readonly UserManager<AppUser> _userManager;
+    private readonly IAchievementService _achievementService;
+    private readonly NotificationSender _notifier;
+
+    public LibraryFacade(
+        AppDbContext context,
+        UserManager<AppUser> userManager,
+        IAchievementService achievementService,
+        NotificationSender notifier)
     {
-        private readonly IUserService _userService;
-        private readonly HardcoverAuthService _authService;
-        private readonly AchievementService _achievementService;
+        _context = context;
+        _userManager = userManager;
+        _achievementService = achievementService;
+        _notifier = notifier;
+    }
 
-        public LibraryFacade(
-            IUserService userService,
-            HardcoverAuthService authService,
-            AchievementService achievementService)
+    public async Task<UserBook?> GetUserBookAsync(string userId, int bookId)
+    {
+        return await _context.UserBooks
+            .Include(ub => ub.Book)
+            .FirstOrDefaultAsync(ub => ub.BookId == bookId && ub.UserId == userId);
+    }
+
+    public async Task<IEnumerable<AchievementDto>> UpdateBookStatusAsync(UserBook userBook, string newStatus)
+    {
+        var previousStatus = userBook.Status;
+
+        switch (newStatus)
         {
-            _userService = userService;
-            _authService = authService;
-            _achievementService = achievementService;
+            case "Read":
+                userBook.Book.MarkAsRead();
+                break;
+            case "Reading":
+                userBook.Book.MarkAsReading();
+                break;
+            case "Unread":
+                userBook.Book.MarkAsUnread();
+                break;
+            default:
+                throw new ArgumentException("Invalid status value.");
         }
 
-        // Get a book for a user if they have permission
-        public async Task<Book?> GetBookForUserAsync(int bookId, string currentUserId)
+        userBook.Status = userBook.Book.Status;
+
+        var user = await _userManager.FindByIdAsync(userBook.UserId);
+        if (user != null)
         {
-            var user = await _userService.GetUserByIdAsync(currentUserId);
-            if (user == null) return null;
+            if (previousStatus != "Read" && newStatus == "Read")
+            {
+                user.BooksRead++;
+                user.Points += 10;
+                await _notifier.SendAsync(user.Id, "read", $"You finished reading '{userBook.Book?.Title ?? "a book"}'! 🎉");
+            }
+            else if (previousStatus == "Read" && newStatus != "Read")
+            {
+                user.BooksRead--;
+                user.Points -= 10;
+            }
 
-            bool hasPermission = await _authService.CheckBookAccessAsync(user, bookId);
-            if (!hasPermission)
-                throw new UnauthorizedAccessException("You do not have permission to access this book.");
-
-            var book = await _userService.GetBookByIdAsync(bookId);
-            return book;
+            await _userManager.UpdateAsync(user);
         }
 
-        // Add achievement to user when book is read
-        public async Task AddReadAchievementAsync(string userId, int bookId)
+        var unlockedAchievements = await _achievementService.CheckAchievementAsync(user);
+        await _context.SaveChangesAsync();
+
+        return unlockedAchievements.Select(a => new AchievementDto
         {
-            await _achievementService.RecordBookReadAsync(userId, bookId);
-        }
+            Id = a.Id,
+            Title = a.Title,
+            Description = a.Description,
+            PointsReward = a.PointsReward,
+            IconUrl = a.IconUrl
+        });
+    }
+
+    public async Task AddReviewAsync(UserBook userBook, ReviewDto dto)
+    {
+        userBook.Review = dto.Review;
+        userBook.Rating = dto.Rating;
+
+        await _notifier.SendAsync(userBook.UserId, "review", $"You reviewed '{userBook.Book?.Title ?? "a book"}'. ⭐");
+        await _context.SaveChangesAsync();
     }
 }
