@@ -29,6 +29,17 @@ builder.Services.AddScoped<JwtTokenService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAchievementService, AchievementService>();
 
+// Singleton facade
+builder.Services.AddSingleton<LibraryFacade>(sp =>
+{
+    var context = sp.GetRequiredService<AppDbContext>();
+    var userManager = sp.GetRequiredService<UserManager<AppUser>>();
+    var achievementService = sp.GetRequiredService<IAchievementService>();
+    var notifier = sp.GetRequiredService<NotificationSender>();
+
+    return new LibraryFacade(context, userManager, achievementService, notifier);
+});
+
 builder.Services.AddHttpClient<HardcoverAuthService>();
 builder.Services.AddHttpClient("Hardcover", client =>
 {

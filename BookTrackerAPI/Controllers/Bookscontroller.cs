@@ -3,6 +3,7 @@ using System.Security.Claims;
 using BookTrackerAPI.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using System.Text.Json;
+using BookTrackerAPI.Services;
 
 namespace BookTrackerAPI.Controllers
 {
@@ -14,10 +15,10 @@ namespace BookTrackerAPI.Controllers
 
         public BooksController(LibraryFacade libraryFacade)
         {
+            // Use the singleton instance
             _libraryFacade = libraryFacade;
         }
 
-        // Get a single book for the current user
         [HttpGet("{id}")]
         [Authorize]
         public async Task<IActionResult> GetBook(int id)
@@ -31,7 +32,6 @@ namespace BookTrackerAPI.Controllers
             return Ok(new BookDetailDto(userBook.Book));
         }
 
-        // Update the status of a user's book
         [HttpPut("{id}/status")]
         [Authorize]
         public async Task<IActionResult> UpdateStatus(int id, [FromBody] JsonElement body)
@@ -54,7 +54,6 @@ namespace BookTrackerAPI.Controllers
             });
         }
 
-        // Add a review to a user's book
         [HttpPut("review/{id}")]
         [Authorize]
         public async Task<IActionResult> AddReview(int id, [FromBody] ReviewDto dto)

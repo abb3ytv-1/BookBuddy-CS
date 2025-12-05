@@ -1,9 +1,9 @@
-📚 BookBuddy — BookTracker API
+#📚 BookBuddy — BookTracker API
 
 BookBuddy is a C# Web API that allows users to manage, organize, and review their personal book collections.
 Built with ASP.NET Core, Entity Framework Core, and Docker, it supports secure user authentication, achievements, notifications, and external book search.
 
-🎯 Purpose
+#🎯 Purpose
 
 This project demonstrates:
 
@@ -13,14 +13,19 @@ Database integration with Entity Framework Core
 
 Layered architecture: Controllers → Facade → Services → Data
 
-Implementation of design patterns (Facade, State) for maintainable and extensible code
+Implementation of design patterns (Facade, Singleton, State) for maintainable and extensible code
 
 Integration with notifications and external APIs (Hardcover API)
 
-The Facade pattern centralizes business logic, simplifies controllers, and improves maintainability.
-The State pattern allows books to manage their own reading statuses (Unread, Reading, Read) in a clean, object-oriented way.
+Key Design Patterns Used:
 
-🧩 Features
+Facade Pattern: Centralizes business logic, simplifies controllers, and improves maintainability.
+
+Singleton Pattern (LibraryFacade): Ensures a single instance of the facade handles all book-related operations while scoped services like DbContext remain thread-safe.
+
+State Pattern: Allows books to manage their own reading statuses (Unread, Reading, Read) cleanly and modularly.
+
+#🧩 Features
 
 Track book status: Unread, Reading, Read
 
@@ -34,8 +39,9 @@ Secure endpoints using JWT/Identity
 
 External API integration for searching books
 
-🧰 Setup & Run (Backend)
-Requirements
+#🧰 Setup & Run (Backend)
+
+Requirements:
 
 .NET 8 SDK or later
 
@@ -43,13 +49,14 @@ Docker Desktop
 
 Visual Studio 2022 or VS Code
 
-Run Using .NET CLI
+Run Using .NET CLI:
+
 cd BookTrackerAPI
 dotnet restore
 dotnet build
 dotnet run
 
-🧠 Architecture & Design
+#🧠 Architecture & Design
 Facade Pattern
 
 The LibraryFacade simplifies controllers by centralizing interactions with:
@@ -62,7 +69,7 @@ AchievementService (achievement tracking)
 
 NotificationSender (user notifications)
 
-Controllers now focus only on HTTP requests/responses, while the facade handles all business logic for:
+Controllers now focus only on HTTP requests/responses, while the facade handles all business logic:
 
 Updating book statuses
 
@@ -72,7 +79,17 @@ Awarding achievements
 
 Sending notifications
 
-State Pattern
+#Singleton Pattern
+
+LibraryFacade is registered as a singleton via dependency injection.
+
+Provides centralized access to library operations across controllers.
+
+Scoped services like DbContext and UserManager remain safe and thread-safe.
+
+Ensures consistent business logic and reduces duplication across the app.
+
+#State Pattern
 
 Book reading statuses are managed with the State Pattern, allowing each book to handle its own state transitions:
 
@@ -89,7 +106,7 @@ Keeps the model smart and modular
 
 Makes it easy to add future states (e.g., Wishlist, Abandoned)
 
-✅ Benefits
+#✅ Benefits
 
 Clean separation of concerns
 
