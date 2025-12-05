@@ -1,9 +1,9 @@
-#📚 BookBuddy — BookTracker API
+📚 BookBuddy — BookTracker API
 
 BookBuddy is a C# Web API that allows users to manage, organize, and review their personal book collections.
 Built with ASP.NET Core, Entity Framework Core, and Docker, it supports secure user authentication, achievements, notifications, and external book search.
 
-#🎯 Purpose
+🎯 Purpose
 
 This project demonstrates:
 
@@ -21,17 +21,17 @@ Key Design Patterns Used:
 
 Facade Pattern: Centralizes business logic, simplifies controllers, and improves maintainability.
 
-Singleton Pattern (LibraryFacade): Ensures a single instance of the facade handles all book-related operations while scoped services like DbContext remain thread-safe.
+Singleton Pattern (LibraryFacade): Ensures a single instance of the facade handles all book-related operations while keeping scoped services thread-safe.
 
 State Pattern: Allows books to manage their own reading statuses (Unread, Reading, Read) cleanly and modularly.
 
-#🧩 Features
+🧩 Features
 
 Track book status: Unread, Reading, Read
 
 Add reviews and ratings
 
-Achievements system when books are read
+Achievement system triggered by reading milestones
 
 Notifications for reviews and completed books
 
@@ -39,7 +39,7 @@ Secure endpoints using JWT/Identity
 
 External API integration for searching books
 
-#🧰 Setup & Run (Backend)
+🧰 Setup & Run (Backend)
 
 Requirements:
 
@@ -56,7 +56,12 @@ dotnet restore
 dotnet build
 dotnet run
 
-#🧠 Architecture & Design
+
+Open Swagger UI to explore API endpoints:
+
+https://localhost:{port}/swagger
+
+🧠 Architecture & Design
 Facade Pattern
 
 The LibraryFacade simplifies controllers by centralizing interactions with:
@@ -69,7 +74,7 @@ AchievementService (achievement tracking)
 
 NotificationSender (user notifications)
 
-Controllers now focus only on HTTP requests/responses, while the facade handles all business logic:
+Responsibilities:
 
 Updating book statuses
 
@@ -79,19 +84,19 @@ Awarding achievements
 
 Sending notifications
 
-#Singleton Pattern
+Singleton Pattern
 
 LibraryFacade is registered as a singleton via dependency injection.
 
 Provides centralized access to library operations across controllers.
 
-Scoped services like DbContext and UserManager remain safe and thread-safe.
+Scoped services like DbContext remain safe per request.
 
 Ensures consistent business logic and reduces duplication across the app.
 
-#State Pattern
+State Pattern
 
-Book reading statuses are managed with the State Pattern, allowing each book to handle its own state transitions:
+Book reading statuses are managed with the State Pattern:
 
 public void MarkAsRead() => State.MarkAsRead(this);
 public void MarkAsUnread() => State.MarkAsUnread(this);
@@ -106,7 +111,7 @@ Keeps the model smart and modular
 
 Makes it easy to add future states (e.g., Wishlist, Abandoned)
 
-#✅ Benefits
+✅ Benefits
 
 Clean separation of concerns
 
